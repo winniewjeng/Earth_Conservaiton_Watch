@@ -29,21 +29,27 @@ with urllib.request.urlopen(
             # create a tuple as event_dict key that contains my logitude and latitude
             coord = (data['events'][count]['geometries'][0]['coordinates'][0],
                      data['events'][count]['geometries'][0]['coordinates'][1])
+            event = data['events'][count]['title']
+            coord = str(coord)
+            event_dict.update({coord: event})
         except IndexError:
-            print('No second coordinate')
             pass
-
-        event = data['events'][count]['title']
-
-        event_dict.update({coord: event})
-
-        print()
         # print(event_dict)
         count = count + 1
 
     for i in event_dict:
-        print(event_dict[i])
-    print("\nend")
+        item = event_dict[i]
+        print(item, i)
+
+
+    with open('result.json', 'w') as fp:
+        json.dump(event_dict, fp)
+
+
+    # print(len(event_dict))
+
+        # print(event_dict[i])
+
 
 # def response(url):
 #     with urllib.request.urlopen(url) as response:
