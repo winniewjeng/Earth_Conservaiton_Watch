@@ -18,23 +18,31 @@ with urllib.request.urlopen(
     # print(data)
     count = 0
     for i in data['events']:
-        print(data['events'][count]['title'])
-        print(data['events'][count]['geometries'][0]['coordinates'][0])  # long
+
+        # print(data['events'][count]['title'])
+        # print(data['events'][count]['geometries'][0]['coordinates'][0])  # long
+        # try:
+        #     print(data['events'][count]['geometries'][0]['coordinates'][1])  # lat
+        # except IndexError:
+        #     print('No second coordinate')
         try:
-            print(data['events'][count]['geometries'][0]['coordinates'][1])  # lat
+            # create a tuple as event_dict key that contains my logitude and latitude
+            coord = (data['events'][count]['geometries'][0]['coordinates'][0],
+                     data['events'][count]['geometries'][0]['coordinates'][1])
         except IndexError:
             print('No second coordinate')
+            pass
 
-        # create a tuple as event_dict key that contains my logitude and latitude
-        coord = (data['events'][count]['geometries'][0]['coordinates'][0],
-                 data['events'][count]['geometries'][0]['coordinates'][1])
+        event = data['events'][count]['title']
 
-
-        event_dict = event_dict + {:}
+        event_dict.update({coord: event})
 
         print()
+        # print(event_dict)
         count = count + 1
 
+    for i in event_dict:
+        print(event_dict[i])
     print("\nend")
 
 # def response(url):
