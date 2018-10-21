@@ -45,6 +45,11 @@ with urllib.request.urlopen(
     with open('result.json', 'w') as fp:
         json.dump(event_dict, fp)
 
+    fp.close()
+
+    # test if point is inside a polygon
+    # convert a dictionary to cvs file
+
 
     # print(len(event_dict))
 
